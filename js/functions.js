@@ -9,5 +9,19 @@ const isPalindrome = (string) => {
   return oneWord === reverseString;
 };
 
+const getNumber = (string) => {
+  if (typeof string === 'number') {
+    return Math.abs(string.toString().replaceAll('.', ''));
+  }
+  let numberString = '';
+  for (let i = 0; i < string.length; i++) {
+    if (!isNaN(parseInt(string.at(i), 10))) {
+      numberString += string.at(i);
+    }
+  }
+  return parseInt(numberString, 10);
+};
+
 isCheckLength('проверяемая строка', 18);
 isPalindrome('Лёша на полке клопа нашёл ');
+getNumber(-1.5);
