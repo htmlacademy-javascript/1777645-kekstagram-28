@@ -22,6 +22,16 @@ const getNumber = (string) => {
   return parseInt(numberString, 10);
 };
 
+const getNewString = (string, minLength, symbols) => {
+  const addSymbols = minLength - string.length;
+  if (addSymbols <= 0) {
+    return string;
+  }
+  return symbols.slice(0, addSymbols % symbols.length) + symbols.repeat(addSymbols / symbols.length) + string;
+};
+
+
 isCheckLength('проверяемая строка', 18);
 isPalindrome('Лёша на полке клопа нашёл ');
 getNumber(-1.5);
+getNewString('q', 4, 'werty');
