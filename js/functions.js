@@ -15,7 +15,7 @@ const getNumber = (string) => {
   }
   let numberString = '';
   for (let i = 0; i < string.length; i++) {
-    if (!isNaN(parseInt(string.at(i), 10))) {
+    if (!Number.isNaN(parseInt(string.at(i), 10))) {
       numberString += string.at(i);
     }
   }
