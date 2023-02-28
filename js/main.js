@@ -34,3 +34,11 @@ const createRandomIdFromRangeGenerator = (min, max) => {
     return currentValue;
   };
 };
+
+const getCommentMessage = () => {
+  const commentValues = getRandomInteger(1, 2);
+  if (commentValues >= 2) {
+    return `${getRandomArrayElement(COMMENTS)} ${getRandomArrayElement(COMMENTS)}`;
+  }
+  return COMMENTS[getRandomInteger(0, COMMENTS.length - 1)];
+};
