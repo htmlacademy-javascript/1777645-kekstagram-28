@@ -42,3 +42,27 @@ const getCommentMessage = () => {
   }
   return COMMENTS[getRandomInteger(0, COMMENTS.length - 1)];
 };
+
+const getPhotoId = createRandomIdFromRangeGenerator(1, FIRST_NUMBER);
+const getPhotoUrl = createRandomIdFromRangeGenerator(1, FIRST_NUMBER);
+const getPhotoDescription = () => getRandomArrayElement(DESCRIPTION);
+const getPhotoLikes = () => getRandomInteger(SECOND_NUMBER, THIRD_NUMBER);
+const getCommentId = createRandomIdFromRangeGenerator(1, THIRD_NUMBER);
+const getCommentAvatar = createRandomIdFromRangeGenerator(1, FOURTH_NUMBER);
+const getCommentName = () => getRandomArrayElement(NAME);
+
+const createPictureDescription = () => ({
+  id: getPhotoId(),
+  url: `photos/${getPhotoUrl()}.jpg`,
+  description: getPhotoDescription(),
+  likes: getPhotoLikes(),
+  comments: {
+    id: getCommentId(),
+    avatar: `img/avatar-${getCommentAvatar()}.svg`,
+    message: getCommentMessage(),
+    name: getCommentName()
+  },
+});
+
+/* eslint-disable-next-line no-unused-vars */
+const pictureDescription = Array.from({ length: SIMILAR_PHOTO_COUNT }, createPictureDescription);
