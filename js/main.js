@@ -17,4 +17,4 @@ const getRandomInteger = (min, max) => {
   return Math.floor(result);
 };
 
-getRandomInteger(0, 6);
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
