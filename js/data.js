@@ -33,28 +33,28 @@ const getCommentMessage = () => {
 };
 
 const createPictureObject = () => {
-  const PhotoId = createIdGenerator(1, PICTURE_COUNT);
-  const PhotoUrl = createIdGenerator(1, PICTURE_COUNT);
-  const PhotoDescription = () => getRandomArrayElement(DESCRIPTIONS);
-  const PhotoLikes = () => getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT);
-  const CommentId = createIdGenerator(1, PICTURE_COUNT);
-  const CommentAvatar = createIdGenerator(1, AVATAR_COUNT);
-  const CommentName = () => getRandomArrayElement(NAMES);
+  const photoId = createIdGenerator(1, PICTURE_COUNT);
+  const photoUrl = createIdGenerator(1, PICTURE_COUNT);
+  const getPhotoDescription = () => getRandomArrayElement(DESCRIPTIONS);
+  const getPhotoLikes = () => getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT);
+  const commentId = createIdGenerator(1, PICTURE_COUNT);
+  const commentAvatar = createIdGenerator(1, AVATAR_COUNT);
+  const getCommentName = () => getRandomArrayElement(NAMES);
 
   return {
-    id: PhotoId(),
-    url: `photos/${PhotoUrl()}.jpg`,
-    description: PhotoDescription(),
-    likes: PhotoLikes(),
+    id: photoId(),
+    url: `photos/${photoUrl()}.jpg`,
+    description: getPhotoDescription(),
+    likes: getPhotoLikes(),
     comments: {
-      id: CommentId(),
-      avatar: `img/avatar-${CommentAvatar()}.svg`,
+      id: commentId(),
+      avatar: `img/avatar-${commentAvatar()}.svg`,
       message: getCommentMessage(),
-      name: CommentName()
+      name: getCommentName()
     },
   };
 };
 
-const arrayPictures = () => Array.from({ length: PICTURE_COUNT }, createPictureObject);
+const createArrayPictures = () => Array.from({ length: PICTURE_COUNT }, createPictureObject);
 
-export { arrayPictures };
+export { createArrayPictures };
