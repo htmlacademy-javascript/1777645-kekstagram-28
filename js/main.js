@@ -1,3 +1,1 @@
-import { createArrayPictures } from './data.js';
-
-createArrayPictures();
+import './miniatures.js';
