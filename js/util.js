@@ -24,4 +24,15 @@ const createIdGenerator = (min, max) => {
   };
 };
 
-export { getRandomInteger, getRandomArrayElement, createIdGenerator };
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+const makeElement = (tagName, className, text) => {
+  const element = document.createElement(tagName);
+  element.classList.add(className);
+  if (text) {
+    element.textContent = text;
+  }
+  return element;
+};
+
+export { getRandomInteger, getRandomArrayElement, createIdGenerator, isEscapeKey, makeElement };
