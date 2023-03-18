@@ -7,7 +7,6 @@ const getRandomInteger = (min, max) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-
 const createIdGenerator = (min, max) => {
   const previousValues = [];
 
