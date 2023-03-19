@@ -1,5 +1,5 @@
 import { picturesContainer } from './miniatures.js';
-import { isEscapeKey, makeElement } from './util.js';
+import { isEscapeKey } from './util.js';
 import { miniaturesData } from './main.js';
 
 const bigPicture = document.querySelector('.big-picture');
@@ -10,6 +10,7 @@ const bigPictureClose = bigPicture.querySelector('.big-picture__cancel');
 const commentsContainer = bigPicture.querySelector('.social__comments');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const socialContainer = bigPicture.querySelector('.social__comments');
+const socialComment = bigPicture.querySelector('.social__comment');
 const socialCommentsLoader = bigPicture.querySelector('.social__comments-loader ');
 const COMMENT_SHOW_COUNT = 5;
 
@@ -41,15 +42,12 @@ const clearComments = () => {
 
 const createComment = (array) => {
   array.comments.forEach((item) => {
-    const commentList = makeElement('li', 'social__comment');
-    const commentPhoto = makeElement('img', 'social__picture');
-    const commentText = makeElement('p', 'social__text');
-    commentList.classList.add('hidden');
-    commentPhoto.src = item.avatar;
-    commentPhoto.alt = item.name;
-    commentText.textContent = item.message;
-    commentList.append(commentPhoto, commentText);
-    commentsContainer.append(commentList);
+    const newComment = socialComment.cloneNode(true);
+    newComment.querySelector('.social__picture').src = item.avatar;
+    newComment.querySelector('.social__picture').alt = item.name;
+    newComment.querySelector('.social__text').textContent = item.message;
+    newComment.classList.add('hidden');
+    commentsContainer.append(newComment);
   });
 };
 
@@ -57,15 +55,14 @@ const createDataPhoto = (data) => {
   bigPictureImg.src = data.url;
   bigPictureImg.alt = data.description;
   likesCount.textContent = data.likes;
-  socialContainer.textContent = data.comments.length;
   socialCaption.textContent = data.description;
 };
 
-const showComment = (arr, count) => {
+const showComment = (array, count) => {
   for (let i = 0; i < count; i++) {
-    arr[i].classList.remove('hidden');
+    array[i].classList.remove('hidden');
   }
-  socialCommentCount.textContent = `${socialContainer.children.length - socialContainer.querySelectorAll('.hidden').length} из ${socialContainer.children.length} комментариев`;
+  socialCommentCount.textContent = `${socialContainer.querySelectorAll('li:not(.hidden)').length} из ${socialContainer.children.length} комментариев`;
 };
 
 function loadComment() {
