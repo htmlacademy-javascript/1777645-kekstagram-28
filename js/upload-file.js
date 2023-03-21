@@ -11,7 +11,6 @@ const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeUsersModal();
-    removeInputListener();
   }
 };
 
@@ -26,6 +25,7 @@ function closeUsersModal() {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   uploadFile.value = '';
+  removeInputListener();
 }
 
 const inputInFocus = () => {
@@ -38,15 +38,15 @@ const inputOutFocus = () => {
 
 const addInputListener = () => {
   textHashtags.addEventListener('focus', inputInFocus);
-  textDescription.addEventListener('focus', inputInFocus);
   textHashtags.addEventListener('blur', inputOutFocus);
+  textDescription.addEventListener('focus', inputInFocus);
   textDescription.addEventListener('blur', inputOutFocus);
 };
 
 function removeInputListener() {
   textHashtags.removeEventListener('focus', inputInFocus);
-  textDescription.removeEventListener('focus', inputInFocus);
   textHashtags.removeEventListener('blur', inputOutFocus);
+  textDescription.removeEventListener('focus', inputInFocus);
   textDescription.removeEventListener('blur', inputOutFocus);
 }
 
@@ -60,3 +60,5 @@ uploadFile.addEventListener('change', showImageEditor);
 imgUploadCancel.addEventListener('click', () => {
   closeUsersModal();
 });
+
+export { imgUploadForm };
