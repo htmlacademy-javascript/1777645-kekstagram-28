@@ -6,7 +6,7 @@ const HASHTAG_MAX_LENGTH = 20;
 const COMMENT_MAX_LENGTH = 140;
 const textHashtags = imgUploadForm.querySelector('.text__hashtags');
 const textDescription = imgUploadForm.querySelector('.text__description');
-const ValidatorMessage = {
+const ErrorMessage = {
   NAME: 'Хэш-тег начинается с символа #, состоит из букв и чисел, и разделяется пробелом.',
   LENGTH: 'Максимальная длина одного хэш-тега 20 символов, включая решётку.',
   COUNT: 'Нельзя указать больше 5 хэш-тегов.',
@@ -23,40 +23,42 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'img-upload__error'
 });
 
-const validateHashtagName = (value) => {
+const checkHashtagName = (value) => {
   const hashtagArray = value.split(' ');
   return !value.length ? true : hashtagArray.every((hashtag) => HASHTAG.test(hashtag));
 };
 
-const validateHashtagLength = (value) => {
+const checkHashtagLength = (value) => {
   const hashtagArray = value.split(' ');
   return hashtagArray.every((hashtag) => hashtag.length <= HASHTAG_MAX_LENGTH);
 };
 
-const validateHashtagCount = (value) => {
+const checkHashtagCount = (value) => {
   const hashtagArray = value.split(' ');
   return hashtagArray.length <= HASHTAG_MAX_COUNT;
 };
 
-const validateHashtagDublicates = (value) => {
+const checkHashtagDublicates = (value) => {
   const hashtagArray = value.toLowerCase().split(' ');
   return new Set(hashtagArray).size === hashtagArray.length;
 };
 
-const validateComment = (value) => value.length <= COMMENT_MAX_LENGTH;
+const checkComment = (value) => value.length <= COMMENT_MAX_LENGTH;
 
-pristine.addValidator(textHashtags, validateHashtagName, ValidatorMessage.NAME);
+pristine.addValidator(textHashtags, checkHashtagName, ErrorMessage.NAME);
 
-pristine.addValidator(textHashtags, validateHashtagLength, ValidatorMessage.LENGTH);
+pristine.addValidator(textHashtags, checkHashtagLength, ErrorMessage.LENGTH);
 
-pristine.addValidator(textHashtags, validateHashtagCount, ValidatorMessage.COUNT);
+pristine.addValidator(textHashtags, checkHashtagCount, ErrorMessage.COUNT);
 
-pristine.addValidator(textHashtags, validateHashtagDublicates, ValidatorMessage.DUPLICATE);
+pristine.addValidator(textHashtags, checkHashtagDublicates, ErrorMessage.DUPLICATE);
 
-pristine.addValidator(textDescription, validateComment, ValidatorMessage.MESSAGE);
+pristine.addValidator(textDescription, checkComment, ErrorMessage.MESSAGE);
 
 imgUploadForm.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {
     evt.preventDefault();
   }
 });
+
+export { pristine };

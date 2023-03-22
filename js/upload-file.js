@@ -1,3 +1,4 @@
+import { pristine } from './validation.js';
 import { isEscapeKey } from './util.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -24,7 +25,8 @@ function closeUsersModal() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  uploadFile.value = '';
+  imgUploadForm.reset();
+  pristine.reset();
   removeInputListener();
 }
 
