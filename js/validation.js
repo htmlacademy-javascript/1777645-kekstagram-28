@@ -20,20 +20,11 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'img-upload__error'
 });
 
-const checkHashtagName = (value) => {
-  const hashtagArray = value.split(' ');
-  return !value.length ? true : hashtagArray.every((hashtag) => HASHTAG.test(hashtag));
-};
+const checkHashtagName = (value) => !value.length ? true : value.split(' ').every((hashtag) => HASHTAG.test(hashtag));
 
-const checkHashtagLength = (value) => {
-  const hashtagArray = value.split(' ');
-  return hashtagArray.every((hashtag) => hashtag.length <= HASHTAG_MAX_LENGTH);
-};
+const checkHashtagLength = (value) => value.split(' ').every((hashtag) => hashtag.length <= HASHTAG_MAX_LENGTH);
 
-const checkHashtagCount = (value) => {
-  const hashtagArray = value.split(' ');
-  return hashtagArray.length <= HASHTAG_MAX_COUNT;
-};
+const checkHashtagCount = (value) => value.split(' ').length <= HASHTAG_MAX_COUNT;
 
 const checkHashtagDublicates = (value) => {
   const hashtagArray = value.toLowerCase().split(' ');
