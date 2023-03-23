@@ -2,6 +2,7 @@ import { picturesContainer } from './miniatures.js';
 import { isEscapeKey } from './util.js';
 import { miniaturesData } from './main.js';
 
+const COMMENT_SHOW_COUNT = 5;
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
 const likesCount = bigPicture.querySelector('.likes-count');
@@ -12,7 +13,6 @@ const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const socialContainer = bigPicture.querySelector('.social__comments');
 const socialComment = bigPicture.querySelector('.social__comment');
 const socialCommentsLoader = bigPicture.querySelector('.social__comments-loader ');
-const COMMENT_SHOW_COUNT = 5;
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -90,6 +90,4 @@ const openFullPhoto = (evt) => {
 
 picturesContainer.addEventListener('click', openFullPhoto);
 
-bigPictureClose.addEventListener('click', () => {
-  closeUsersModal();
-});
+bigPictureClose.addEventListener('click', closeUsersModal);

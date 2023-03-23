@@ -1,5 +1,6 @@
 import { pristine } from './validation.js';
 import { isEscapeKey } from './util.js';
+import { resetScale } from './scale.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = imgUploadForm.querySelector('#upload-file');
@@ -19,6 +20,7 @@ const openUsersModal = () => {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  resetScale();
 };
 
 function closeUsersModal() {
