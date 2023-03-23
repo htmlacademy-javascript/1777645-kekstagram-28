@@ -1408,3 +1408,23 @@ main {
 .hidden {
   display: none;
 }
+
+.img-upload__field-wrapper--invalid {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-upload__field-wrapper--invalid:first-child {
+  margin-bottom: 20px;
+}
+
+.img-upload__field-wrapper--invalid .text__hashtags,
+.img-upload__field-wrapper--invalid .text__description {
+  margin-bottom: 3px;
+}
+
+.img-upload__error {
+  color: #00ffff;
+  font-size: 15px;
+  font-weight: 700;
+}
