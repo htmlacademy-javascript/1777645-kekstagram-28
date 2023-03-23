@@ -61,8 +61,6 @@ const showImageEditor = () => {
 
 uploadFile.addEventListener('change', showImageEditor);
 
-imgUploadCancel.addEventListener('click', () => {
-  closeUsersModal();
-});
+imgUploadCancel.addEventListener('click', closeUsersModal);
 
 export { imgUploadForm };
