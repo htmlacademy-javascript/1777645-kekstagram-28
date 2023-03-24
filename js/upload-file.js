@@ -1,7 +1,7 @@
 import { pristine } from './validation.js';
 import { isEscapeKey } from './util.js';
 import { resetScale } from './scale.js';
-import { resetEffect } from './effect.js';
+import { resetEffect, deleteSlider } from './effect.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = imgUploadForm.querySelector('#upload-file');
@@ -32,6 +32,7 @@ function closeUsersModal() {
   pristine.reset();
   removeInputListener();
   resetEffect();
+  deleteSlider();
 }
 
 const inputInFocus = () => {
