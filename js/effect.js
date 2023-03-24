@@ -25,15 +25,17 @@ const hideSlider = () => {
   imgUploadEffectLevel.classList.add('hidden');
 };
 
-noUiSlider.create(effectLevelSlider, {
-  range: {
-    min: DEFAULT_EFFECT.MIN,
-    max: DEFAULT_EFFECT.MAX,
-  },
-  start: DEFAULT_EFFECT.MAX,
-  step: DEFAULT_EFFECT.STEP,
-  connect: 'lower'
-});
+const createSlider = () => {
+  noUiSlider.create(effectLevelSlider, {
+    range: {
+      min: DEFAULT_EFFECT.MIN,
+      max: DEFAULT_EFFECT.MAX,
+    },
+    start: DEFAULT_EFFECT.MAX,
+    step: DEFAULT_EFFECT.STEP,
+    connect: 'lower'
+  });
+};
 
 const updateSlider = () => {
   effectLevelSlider.noUiSlider.updateOptions({
@@ -74,8 +76,9 @@ const deleteSlider = () => {
   effectLevelSlider.noUiSlider.destroy();
 };
 
-effectsList.addEventListener('change', onEffectsChange);
+const addEventEffect = () => {
+  effectsList.addEventListener('change', onEffectsChange);
+  effectLevelSlider.noUiSlider.on('update', sliderUpdate);
+};
 
-effectLevelSlider.noUiSlider.on('update', sliderUpdate);
-
-export { resetEffect, deleteSlider };
+export { addEventEffect, resetEffect, deleteSlider, createSlider };

@@ -1,7 +1,7 @@
 import { pristine } from './validation.js';
 import { isEscapeKey } from './util.js';
 import { addEventScale, resetScale, deleteScale } from './scale.js';
-import { resetEffect, deleteSlider } from './effect.js';
+import { addEventEffect, resetEffect, deleteSlider, createSlider } from './effect.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = imgUploadForm.querySelector('#upload-file');
@@ -23,6 +23,8 @@ const openUsersModal = () => {
   document.addEventListener('keydown', onDocumentKeydown);
   resetScale();
   addEventScale();
+  createSlider();
+  addEventEffect();
 };
 
 function closeUsersModal() {
