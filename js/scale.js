@@ -32,8 +32,14 @@ const onButtonBigger = () => {
 
 const resetScale = () => scalePreview(DEFAULT_SCALE_VALUE);
 
-scaleControlSmaller.addEventListener('click', onButtonSmaller);
+const deleteScale = () => {
+  scaleControlSmaller.removeEventListener('click', onButtonSmaller);
+  scaleControlBigger.removeEventListener('click', onButtonBigger);
+};
 
-scaleControlBigger.addEventListener('click', onButtonBigger);
+const addEventScale = () => {
+  scaleControlSmaller.addEventListener('click', onButtonSmaller);
+  scaleControlBigger.addEventListener('click', onButtonBigger);
+};
 
-export { resetScale };
+export { resetScale, deleteScale, addEventScale };
