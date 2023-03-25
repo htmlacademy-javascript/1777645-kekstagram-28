@@ -72,13 +72,14 @@ const resetEffect = () => {
   updateSlider();
 };
 
-const deleteSlider = () => {
-  effectLevelSlider.noUiSlider.destroy();
-};
-
-const addEventEffect = () => {
+const addEffectListener = () => {
   effectsList.addEventListener('change', onEffectsChange);
   effectLevelSlider.noUiSlider.on('update', sliderUpdate);
 };
 
-export { addEventEffect, resetEffect, deleteSlider, createSlider };
+const deleteEffectListener = () => {
+  effectsList.removeEventListener('change', onEffectsChange);
+  effectLevelSlider.noUiSlider.destroy();
+};
+
+export { addEffectListener, resetEffect, deleteEffectListener, createSlider };

@@ -1,7 +1,7 @@
 import { pristine } from './validation.js';
 import { isEscapeKey } from './util.js';
-import { addEventScale, resetScale, deleteScale } from './scale.js';
-import { addEventEffect, resetEffect, deleteSlider, createSlider } from './effect.js';
+import { addScaleListener, resetScale, deleteScaleListener } from './scale.js';
+import { addEffectListener, resetEffect, deleteEffectListener, createSlider } from './effect.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = imgUploadForm.querySelector('#upload-file');
@@ -22,9 +22,9 @@ const openUsersModal = () => {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
   resetScale();
-  addEventScale();
+  addScaleListener();
   createSlider();
-  addEventEffect();
+  addEffectListener();
 };
 
 function closeUsersModal() {
@@ -34,9 +34,9 @@ function closeUsersModal() {
   imgUploadForm.reset();
   pristine.reset();
   removeInputListener();
-  deleteScale();
+  deleteScaleListener();
   resetEffect();
-  deleteSlider();
+  deleteEffectListener();
 }
 
 const inputInFocus = () => {
