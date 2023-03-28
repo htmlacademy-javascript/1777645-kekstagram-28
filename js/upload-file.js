@@ -21,6 +21,7 @@ const openUsersModal = () => {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  imgUploadCancel.addEventListener('click', closeUsersModal);
   resetScale();
   addScaleListener();
   createSlider();
@@ -31,6 +32,7 @@ function closeUsersModal() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  imgUploadCancel.removeEventListener('click', closeUsersModal);
   imgUploadForm.reset();
   pristine.reset();
   removeInputListener();
@@ -61,13 +63,11 @@ function removeInputListener() {
   textDescription.removeEventListener('blur', inputOutFocus);
 }
 
-const showImageEditor = () => {
+const onUploadFileChange = () => {
   openUsersModal();
   addInputListener();
 };
 
-uploadFile.addEventListener('change', showImageEditor);
+uploadFile.addEventListener('change', onUploadFileChange);
 
-imgUploadCancel.addEventListener('click', closeUsersModal);
-
-export { imgUploadForm };
+export { imgUploadForm, closeUsersModal };

@@ -6,8 +6,8 @@ const EFFECTS = [
   { NAME: 'phobos', STYLE: 'blur', MIN: 0, MAX: 3, STEP: 0.1, UNIT: 'px' },
   { NAME: 'heat', STYLE: 'brightness', MIN: 1, MAX: 3, STEP: 0.1, UNIT: '' }];
 
-const DEFAULT_EFFECT = EFFECTS[0];
-let currentEffect = DEFAULT_EFFECT;
+const defaultEffect = EFFECTS[0];
+let currentEffect = defaultEffect;
 
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
 const effectLevelValue = document.querySelector('.effect-level__value');
@@ -15,24 +15,20 @@ const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level')
 const effectsList = document.querySelector('.effects__list');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 
-const isDefault = () => currentEffect === DEFAULT_EFFECT;
+const isDefault = () => currentEffect === defaultEffect;
 
-const showSlider = () => {
-  imgUploadEffectLevel.classList.remove('hidden');
-};
+const showSlider = () => imgUploadEffectLevel.classList.remove('hidden');
 
-const hideSlider = () => {
-  imgUploadEffectLevel.classList.add('hidden');
-};
+const hideSlider = () => imgUploadEffectLevel.classList.add('hidden');
 
 const createSlider = () => {
   noUiSlider.create(effectLevelSlider, {
     range: {
-      min: DEFAULT_EFFECT.MIN,
-      max: DEFAULT_EFFECT.MAX,
+      min: defaultEffect.MIN,
+      max: defaultEffect.MAX,
     },
-    start: DEFAULT_EFFECT.MAX,
-    step: DEFAULT_EFFECT.STEP,
+    start: defaultEffect.MAX,
+    step: defaultEffect.STEP,
     connect: 'lower'
   });
 };
@@ -58,7 +54,7 @@ const onEffectsChange = (evt) => {
 
 const sliderUpdate = () => {
   effectLevelValue.value = effectLevelSlider.noUiSlider.get();
-  imgUploadPreview.style.filter = isDefault() ? DEFAULT_EFFECT.STYLE : `${currentEffect.STYLE}(${effectLevelValue.value}${currentEffect.UNIT})`;
+  imgUploadPreview.style.filter = isDefault() ? defaultEffect.STYLE : `${currentEffect.STYLE}(${effectLevelValue.value}${currentEffect.UNIT})`;
 
   if (isDefault()) {
     hideSlider();
@@ -68,7 +64,7 @@ const sliderUpdate = () => {
 };
 
 const resetEffect = () => {
-  currentEffect = DEFAULT_EFFECT;
+  currentEffect = defaultEffect;
   updateSlider();
 };
 
