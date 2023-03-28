@@ -1,12 +1,20 @@
-import { createArrayPictures } from './data.js';
-import { createMiniatures } from './miniatures.js';
-import './full-photo.js';
 import './validation.js';
-import './scale.js';
-import './effect.js';
 import './upload-file.js';
+import { createMiniatures } from './miniatures.js';
+import { checkImageData } from './full-photo.js';
+import { setUserFormSubmit } from './validation.js';
+import { closeUsersModal } from './upload-file.js';
+import { getData } from './api.js';
+import { showAlert } from './messages.js';
 
-const miniaturesData = createArrayPictures();
-createMiniatures(miniaturesData);
+getData()
+  .then((miniatures) => {
+    createMiniatures(miniatures);
+    checkImageData(miniatures);
+  })
+  .catch((err) => {
+    showAlert(err.message);
+  });
 
-export { miniaturesData };
+setUserFormSubmit(closeUsersModal);
+
