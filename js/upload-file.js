@@ -17,10 +17,18 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+const addDocumentListener = () => {
+  document.addEventListener('keydown', onDocumentKeydown);
+};
+
+const dellDocumentListener = () => {
+  document.removeEventListener('keydown', onDocumentKeydown);
+};
+
 const openUsersModal = () => {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  addDocumentListener();
   imgUploadCancel.addEventListener('click', closeUsersModal);
   resetScale();
   addScaleListener();
@@ -31,7 +39,7 @@ const openUsersModal = () => {
 function closeUsersModal() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  dellDocumentListener();
   imgUploadCancel.removeEventListener('click', closeUsersModal);
   imgUploadForm.reset();
   pristine.reset();
@@ -71,3 +79,5 @@ const onUploadFileChange = () => {
 uploadFile.addEventListener('change', onUploadFileChange);
 
 export { imgUploadForm, closeUsersModal };
+
+export { addDocumentListener, dellDocumentListener };
