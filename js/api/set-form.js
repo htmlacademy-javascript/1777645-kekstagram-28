@@ -1,6 +1,6 @@
-import { imgUploadForm } from './upload-file.js';
-import { pristine, blockSubmitButton, unblockSubmitButton } from './validation.js';
-import { showMessage, modalUpload } from './messages.js';
+import { imgUploadForm } from '../upload-file.js';
+import { pristine, blockSubmitButton, unblockSubmitButton } from '../validation.js';
+import { showMessage, modalUpload } from '../messages.js';
 import { sendData } from './api.js';
 
 const StatusMessage = {

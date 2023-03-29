@@ -1,6 +1,4 @@
 import { imgUploadForm } from './upload-file.js';
-import { showAlert } from './messages.js';
-import { sendData } from './api.js';
 
 const HASHTAG = /^#[a-zа-яё0-9]{1,}$/i;
 const HASHTAG_MAX_COUNT = 5;
@@ -12,10 +10,6 @@ const ErrorMessage = {
   LENGTH: 'Максимальная длина одного хэш-тега 20 символов, включая решётку.',
   COUNT: 'Нельзя указать больше 5 хэш-тегов.',
   DUPLICATE: 'Один и тот же хэш-тег не может быть использован дважды.',
-};
-const SubmitButtonText = {
-  IDLE: 'Сохранить',
-  SENDING: 'Сохраняю...'
 };
 
 const pristine = new Pristine(imgUploadForm, {
@@ -40,12 +34,10 @@ const checkHashtagDublicates = (value) => {
 
 const blockSubmitButton = () => {
   imgUploadSubmit.disabled = true;
-  imgUploadSubmit.textContent = SubmitButtonText.SENDING;
 };
 
 const unblockSubmitButton = () => {
   imgUploadSubmit.disabled = false;
-  imgUploadSubmit.textContent = SubmitButtonText.IDLE;
 };
 
 pristine.addValidator(textHashtags, checkHashtagName, ErrorMessage.NAME);
@@ -56,20 +48,4 @@ pristine.addValidator(textHashtags, checkHashtagCount, ErrorMessage.COUNT);
 
 pristine.addValidator(textHashtags, checkHashtagDublicates, ErrorMessage.DUPLICATE);
 
-const setUserFormSubmit = (onSuccess) => {
-  imgUploadForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    if (pristine.validate()) {
-      blockSubmitButton();
-      sendData(new FormData(evt.target))
-        .then(onSuccess)
-        .catch((err) => {
-          showAlert(err.message);
-        })
-        .finally(unblockSubmitButton);
-    }
-  });
-};
-
-export { pristine, setUserFormSubmit };
+export { pristine, blockSubmitButton, unblockSubmitButton };
