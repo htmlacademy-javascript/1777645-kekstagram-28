@@ -2,7 +2,10 @@ import { isEscapeKey } from './util.js';
 import { addDocumentListener, dellDocumentListener } from './upload-file.js';
 
 const messageFragment = document.createDocumentFragment();
-const CLASS_ERROR = 'error';
+const CLASS_MESSAGE = {
+  SUCCESS: 'success',
+  ERROR: 'error'
+};
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
@@ -18,28 +21,33 @@ const modalUpload = () => {
   document.body.append(messageFragment);
 };
 
-const pressingKey = (value) => {
-  const windowMessage = document.querySelector(`.${value}`);
-  const onDocumentKeydown = (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      if (windowMessage.matches(`.${CLASS_ERROR}`)) {
-        addDocumentListener();
-      }
-      windowMessage.remove();
-      document.removeEventListener('keydown', onDocumentKeydown);
-    }
-  };
-  document.addEventListener('keydown', onDocumentKeydown);
+const pressingKey = () => {
+  let windowMessage;
+  if (document.querySelector(`.${CLASS_MESSAGE.SUCCESS}`)) {
+    windowMessage = document.querySelector(`.${CLASS_MESSAGE.SUCCESS}`);
+  } else if (document.querySelector(`.${CLASS_MESSAGE.ERROR}`)) {
+    windowMessage = document.querySelector(`.${CLASS_MESSAGE.ERROR}`);
+    addDocumentListener();
+  }
+  windowMessage.remove();
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
+
+function onDocumentKeydown(evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    pressingKey();
+  }
+}
 
 const onButtonCloseClick = (value) => {
   const messageButton = document.querySelector(`.${value}__button`);
   messageButton.addEventListener('click', (evt) => {
     document.querySelector(`.${value}`).remove();
-    if (evt.target.matches(`.${CLASS_ERROR}__button`)) {
+    if (evt.target.matches(`.${CLASS_MESSAGE.ERROR}__button`)) {
       addDocumentListener();
     }
+    document.removeEventListener('keydown', onDocumentKeydown);
   });
 };
 
@@ -48,8 +56,9 @@ const isMessage = (value) => {
   const onCloseMessageClick = (evt) => {
     if (windowMessage === evt.target) {
       windowMessage.remove();
+      document.removeEventListener('keydown', onDocumentKeydown);
     }
-    if (evt.target.matches(`.${CLASS_ERROR}`)) {
+    if (evt.target.matches(`.${CLASS_MESSAGE.ERROR}`)) {
       addDocumentListener();
     }
   };
@@ -63,16 +72,16 @@ const modalMessage = (value) => {
   messageFragment.append(messageElement);
   document.body.append(messageFragment);
 
-  if (messageElement.matches(`.${CLASS_ERROR}`)) {
+  if (messageElement.matches(`.${CLASS_MESSAGE.ERROR}`)) {
     dellDocumentListener();
   }
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const showMessage = (value) => {
   modalMessage(value);
   isMessage(value);
   onButtonCloseClick(value);
-  pressingKey(value);
 };
 
 export { showAlert, modalUpload, showMessage };
