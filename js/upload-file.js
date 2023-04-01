@@ -17,10 +17,19 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+const addDocumentListener = () => {
+  document.addEventListener('keydown', onDocumentKeydown);
+};
+
+const dellDocumentListener = () => {
+  document.removeEventListener('keydown', onDocumentKeydown);
+};
+
 const openUsersModal = () => {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  addDocumentListener();
+  imgUploadCancel.addEventListener('click', closeUsersModal);
   resetScale();
   addScaleListener();
   createSlider();
@@ -30,7 +39,8 @@ const openUsersModal = () => {
 function closeUsersModal() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  dellDocumentListener();
+  imgUploadCancel.removeEventListener('click', closeUsersModal);
   imgUploadForm.reset();
   pristine.reset();
   removeInputListener();
@@ -61,13 +71,13 @@ function removeInputListener() {
   textDescription.removeEventListener('blur', inputOutFocus);
 }
 
-const showImageEditor = () => {
+const onUploadFileChange = () => {
   openUsersModal();
   addInputListener();
 };
 
-uploadFile.addEventListener('change', showImageEditor);
+uploadFile.addEventListener('change', onUploadFileChange);
 
-imgUploadCancel.addEventListener('click', closeUsersModal);
+export { imgUploadForm, closeUsersModal };
 
-export { imgUploadForm };
+export { addDocumentListener, dellDocumentListener };

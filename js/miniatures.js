@@ -15,5 +15,4 @@ const createMiniatures = (array) => {
   picturesContainer.append(pictureFragment);
 };
 
-
 export { createMiniatures, picturesContainer };

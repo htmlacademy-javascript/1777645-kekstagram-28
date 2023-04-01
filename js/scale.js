@@ -14,7 +14,7 @@ const scalePreview = (value) => {
   scaleControlValue.value = `${value}%`;
 };
 
-const onButtonSmaller = () => {
+const onButtonSmallerClick = () => {
   let currentValue = parseInt(scaleControlValue.value, 10);
   if (currentValue > MIN_SCALE_VALUE) {
     currentValue -= SCALE_STEP;
@@ -22,7 +22,7 @@ const onButtonSmaller = () => {
   scalePreview(currentValue);
 };
 
-const onButtonBigger = () => {
+const onButtonBiggerClick = () => {
   let currentValue = parseInt(scaleControlValue.value, 10);
   if (currentValue < MAX_SCALE_VALUE) {
     currentValue += SCALE_STEP;
@@ -32,14 +32,14 @@ const onButtonBigger = () => {
 
 const resetScale = () => scalePreview(DEFAULT_SCALE_VALUE);
 
-const deleteScaleListener = () => {
-  scaleControlSmaller.removeEventListener('click', onButtonSmaller);
-  scaleControlBigger.removeEventListener('click', onButtonBigger);
+const addScaleListener = () => {
+  scaleControlSmaller.addEventListener('click', onButtonSmallerClick);
+  scaleControlBigger.addEventListener('click', onButtonBiggerClick);
 };
 
-const addScaleListener = () => {
-  scaleControlSmaller.addEventListener('click', onButtonSmaller);
-  scaleControlBigger.addEventListener('click', onButtonBigger);
+const deleteScaleListener = () => {
+  scaleControlSmaller.removeEventListener('click', onButtonSmallerClick);
+  scaleControlBigger.removeEventListener('click', onButtonBiggerClick);
 };
 
 export { resetScale, deleteScaleListener, addScaleListener };
