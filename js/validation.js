@@ -1,8 +1,7 @@
-import { imgUploadForm } from './upload-file.js';
-
 const HASHTAG = /^#[a-zа-яё0-9]{1,}$/i;
 const HASHTAG_MAX_COUNT = 5;
 const HASHTAG_MAX_LENGTH = 20;
+const imgUploadForm = document.querySelector('.img-upload__form');
 const textHashtags = imgUploadForm.querySelector('.text__hashtags');
 const imgUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 const ErrorMessage = {
