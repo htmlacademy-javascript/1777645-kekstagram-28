@@ -3,6 +3,8 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const pictureFragment = document.createDocumentFragment();
 
 const createMiniatures = (array) => {
+  picturesContainer.querySelectorAll('.picture').forEach((item) => item.remove());
+
   array.forEach(({ id, url, description, likes, comments }) => {
     const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
