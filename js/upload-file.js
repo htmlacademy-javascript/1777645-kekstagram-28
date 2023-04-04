@@ -80,6 +80,4 @@ const onUploadFileChange = () => {
 
 uploadFile.addEventListener('change', onUploadFileChange);
 
-export { imgUploadForm, closeUsersModal };
-
-export { addDocumentListener, dellDocumentListener };
+export { imgUploadForm, closeUsersModal, addDocumentListener, dellDocumentListener };

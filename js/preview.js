@@ -5,7 +5,6 @@ const imgUploadPreview = document.querySelector('.img-upload__preview img');
 const showPreview = () => {
   const file = imgUploadInput.files[0];
   const fileName = file.name.toLowerCase();
-
   const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {

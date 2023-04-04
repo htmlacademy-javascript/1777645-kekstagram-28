@@ -3,10 +3,7 @@ import { pristine, blockSubmitButton, unblockSubmitButton } from '../validation.
 import { showMessage, modalUpload } from '../messages.js';
 import { sendData } from './api.js';
 
-const StatusMessage = {
-  SUCCESS: 'success',
-  ERROR: 'error'
-};
+const StatusMessage = { SUCCESS: 'success', ERROR: 'error' };
 
 const setUserFormSubmit = (onSuccess) => {
   imgUploadForm.addEventListener('submit', (evt) => {

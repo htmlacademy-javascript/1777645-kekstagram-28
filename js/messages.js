@@ -1,11 +1,8 @@
 import { isEscapeKey } from './util.js';
 import { addDocumentListener, dellDocumentListener } from './upload-file.js';
 
+const CLASS_MESSAGE = { SUCCESS: 'success', ERROR: 'error' };
 const messageFragment = document.createDocumentFragment();
-const CLASS_MESSAGE = {
-  SUCCESS: 'success',
-  ERROR: 'error'
-};
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
