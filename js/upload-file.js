@@ -2,6 +2,7 @@ import { pristine } from './validation.js';
 import { isEscapeKey } from './util.js';
 import { addScaleListener, resetScale, deleteScaleListener } from './scale.js';
 import { addEffectListener, resetEffect, deleteEffectListener, createSlider } from './effect.js';
+import { showPreview } from './preview.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = imgUploadForm.querySelector('#upload-file');
@@ -72,6 +73,7 @@ function removeInputListener() {
 }
 
 const onUploadFileChange = () => {
+  showPreview();
   openUsersModal();
   addInputListener();
 };
