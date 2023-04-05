@@ -1,6 +1,6 @@
-const Filter = { DEFAULT: 'filter-default', RANDOM: 'filter-random', DISCUSSED: 'filter-discussed' };
 const RANGE = 0.5;
 const PICTURE_COUNT = 10;
+const Filter = { DEFAULT: 'filter-default', RANDOM: 'filter-random', DISCUSSED: 'filter-discussed' };
 const imgFilters = document.querySelector('.img-filters');
 const imgFiltersForm = document.querySelector('.img-filters__form');
 const imgFiltersButtons = document.querySelectorAll('.img-filters__button');
