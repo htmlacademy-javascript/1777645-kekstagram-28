@@ -18,11 +18,11 @@ const clearComments = () => {
 };
 
 const createComment = (array) => {
-  array.comments.forEach((item) => {
+  array.forEach((comment) => {
     const newComment = socialComment.cloneNode(true);
-    newComment.querySelector('.social__picture').src = item.avatar;
-    newComment.querySelector('.social__picture').alt = item.name;
-    newComment.querySelector('.social__text').textContent = item.message;
+    newComment.querySelector('.social__picture').src = comment.avatar;
+    newComment.querySelector('.social__picture').alt = comment.name;
+    newComment.querySelector('.social__text').textContent = comment.message;
     newComment.classList.add('hidden');
     commentsContainer.append(newComment);
   });
@@ -80,7 +80,7 @@ const openFullImage = (data) => {
   openUsersModal();
   createDataImage(data);
   clearComments();
-  createComment(data);
+  createComment(data.comments);
   onLoadCommentClick();
 };
 

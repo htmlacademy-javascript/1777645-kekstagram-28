@@ -6,7 +6,22 @@ const imgFiltersForm = document.querySelector('.img-filters__form');
 const imgFiltersButtons = document.querySelectorAll('.img-filters__button');
 
 const randomSort = () => Math.random() - RANGE;
-const discussedSort = (a, b) => b.comments.length - a.comments.length;
+const discussedSort = (a, b) => {
+  if (a.comments === undefined || b.comments === undefined) {
+    return null;
+  }
+  return b.comments.length - a.comments.length;
+};
+
+const checkComments = (array) => {
+  array.forEach((item) => {
+    if (item.comments === undefined) {
+      array.push(item);
+      array.splice(array.indexOf(item), 1);
+    }
+  });
+  return array;
+};
 
 const whichFilterChosen = (currentFilter, array) => {
   switch (currentFilter) {
@@ -15,7 +30,7 @@ const whichFilterChosen = (currentFilter, array) => {
     case Filter.RANDOM:
       return [...array].sort(randomSort).slice(0, PICTURE_COUNT);
     case Filter.DISCUSSED:
-      return [...array].sort(discussedSort);
+      return [...checkComments(array)].sort(discussedSort);
   }
 };
 

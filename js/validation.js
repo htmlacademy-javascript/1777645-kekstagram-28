@@ -1,4 +1,4 @@
-const HASHTAG = /^#[a-zа-яё0-9]{1,}$/i;
+const SYMBOL = /^#[a-zа-яё0-9]{1,}$/i;
 const HASHTAG_MAX_COUNT = 5;
 const HASHTAG_MAX_LENGTH = 20;
 const ErrorMessage = {
@@ -20,7 +20,7 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'img-upload__error'
 });
 
-const checkHashtagName = (value) => !value.length ? true : value.split(' ').every((hashtag) => HASHTAG.test(hashtag));
+const checkHashtagName = (value) => !value.length ? true : value.split(' ').every((hashtag) => SYMBOL.test(hashtag));
 
 const checkHashtagLength = (value) => value.split(' ').every((hashtag) => hashtag.length <= HASHTAG_MAX_LENGTH);
 

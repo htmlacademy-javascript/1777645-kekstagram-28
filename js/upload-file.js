@@ -2,7 +2,7 @@ import { pristine } from './validation.js';
 import { isEscapeKey } from './util.js';
 import { addScaleListener, resetScale, deleteScaleListener } from './scale.js';
 import { addEffectListener, resetEffect, deleteEffectListener, createSlider } from './effect.js';
-import { showPreview } from './preview.js';
+import { showPreview, clearPreview } from './preview.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = imgUploadForm.querySelector('#upload-file');
@@ -48,6 +48,7 @@ function closeUsersModal() {
   deleteScaleListener();
   resetEffect();
   deleteEffectListener();
+  clearPreview();
 }
 
 const inputInFocus = () => {

@@ -48,7 +48,7 @@ const onButtonCloseClick = (value) => {
   });
 };
 
-const isMessage = (value) => {
+const checkMessageListener = (value) => {
   const windowMessage = document.querySelector(`.${value}`);
   const onCloseMessageClick = (evt) => {
     if (windowMessage === evt.target) {
@@ -62,7 +62,7 @@ const isMessage = (value) => {
   windowMessage.addEventListener('click', onCloseMessageClick);
 };
 
-const modalMessage = (value) => {
+const getMessage = (value) => {
   document.querySelector('.img-upload__message').remove();
   const messageTemplate = document.querySelector(`#${value}`).content.querySelector(`.${value}`);
   const messageElement = messageTemplate.cloneNode(true);
@@ -76,8 +76,8 @@ const modalMessage = (value) => {
 };
 
 const showMessage = (value) => {
-  modalMessage(value);
-  isMessage(value);
+  getMessage(value);
+  checkMessageListener(value);
   onButtonCloseClick(value);
 };
 
